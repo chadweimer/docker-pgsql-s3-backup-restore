@@ -11,7 +11,7 @@ script:
   - docker build -t cwmr/pgsql-s3-restore:amd64 -f pgsql-s3-restore/Dockerfile pgsql-s3-restore
   # build armhf images
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  #- docker build -t cwmr/pgsql-s3-backup:arm -f pgsql-s3-backup/Dockerfile.armhf pgsql-s3-backup
+  - docker build -t cwmr/pgsql-s3-backup:arm -f pgsql-s3-backup/Dockerfile.armhf pgsql-s3-backup
   - docker build -t cwmr/pgsql-s3-restore:arm -f pgsql-s3-restore/Dockerfile.armhf pgsql-s3-restore
   # push images
   - wget -O manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
@@ -20,8 +20,8 @@ script:
   - >
     if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
       docker push cwmr/pgsql-s3-backup:amd64
-      #docker push cwmr/pgsql-s3-backup:arm
-      #./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-backup:ARCH --target cwmr/pgsql-s3-backup:latest
+      docker push cwmr/pgsql-s3-backup:arm
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-backup:ARCH --target cwmr/pgsql-s3-backup:latest
       docker push cwmr/pgsql-s3-restore:amd64
       docker push cwmr/pgsql-s3-restore:arm
       ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-restore:ARCH --target cwmr/pgsql-s3-restore:latest

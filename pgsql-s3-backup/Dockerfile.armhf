@@ -1,4 +1,4 @@
-FROM cwmr/aws-cli:amd64
+FROM cwmr/aws-cli:arm
 
 RUN apk --no-cache update && \
     apk --no-cache add curl postgresql && \

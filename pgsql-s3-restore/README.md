@@ -8,9 +8,9 @@ This will potentially put your database in a very bad state or complete destroy 
 
 ## Limitations
 
-This is made to restore a backup made from pgsql-s3-restore, if you backup came from somewhere else please check your format.
+This is made to restore a backup made from pgsql-s3-backup, if you backup came from somewhere else please check your format.
 
-* Your s3 bucket *must* only contain backups which you wish to restore - it will always grabs the 'latest' based on unix sort with no filtering
+* Your s3 bucket path (including any prefix) *must* only contain backups which you wish to restore - it will always grabs the 'latest' based on unix sort with no filtering
 * They must be gzip encoded text sql files
 * If your bucket has more than a 1000 files the latest may not be restore, only one s3 ls command is made
 

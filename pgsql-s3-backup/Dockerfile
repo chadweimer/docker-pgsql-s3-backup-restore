@@ -1,4 +1,6 @@
-FROM cwmr/aws-cli:amd64
+ARG ARCH=amd64
+
+FROM cwmr/aws-cli:$ARCH
 
 RUN apk --no-cache update && \
     apk --no-cache add curl postgresql && \

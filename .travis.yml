@@ -11,10 +11,10 @@ script:
   - docker build -t cwmr/pgsql-s3-restore:amd64 -f pgsql-s3-restore/Dockerfile pgsql-s3-restore
   # build armhf images
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - docker build -t cwmr/pgsql-s3-backup:arm -f pgsql-s3-backup/Dockerfile.armhf pgsql-s3-backup
-  - docker build -t cwmr/pgsql-s3-restore:arm -f pgsql-s3-restore/Dockerfile.armhf pgsql-s3-restore
+  - docker build --build-arg ARCH=arm -t cwmr/pgsql-s3-backup:arm -f pgsql-s3-backup/Dockerfile pgsql-s3-backup
+  - docker build --build-arg ARCH=arm -t cwmr/pgsql-s3-restore:arm -f pgsql-s3-restore/Dockerfile pgsql-s3-restore
   # push images
-  - wget -O manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
+  - wget -O manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.9.0/manifest-tool-linux-amd64
   - chmod +x ./manifest-tool
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - >

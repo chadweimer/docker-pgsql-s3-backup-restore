@@ -25,4 +25,26 @@ script:
       docker push cwmr/pgsql-s3-restore:amd64
       docker push cwmr/pgsql-s3-restore:arm
       ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-restore:ARCH --target cwmr/pgsql-s3-restore:latest
+    elif [ -z "$TRAVIS_TAG" ]; then
+      docker tag cwmr/pgsql-s3-backup:amd64 cwmr/pgsql-s3-backup:dev-amd64
+      docker tag cwmr/pgsql-s3-backup:arm cwmr/pgsql-s3-backup:dev-arm
+      docker push cwmr/pgsql-s3-backup:dev-amd64
+      docker push cwmr/pgsql-s3-backup:dev-arm
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-backup:dev-ARCH --target cwmr/pgsql-s3-backup:dev
+      docker tag cwmr/pgsql-s3-restore:amd64 cwmr/pgsql-s3-restore:dev-amd64
+      docker tag cwmr/pgsql-s3-restore:arm cwmr/pgsql-s3-restore:dev-arm
+      docker push cwmr/pgsql-s3-restore:dev-amd64
+      docker push cwmr/pgsql-s3-restore:dev-arm
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-restore:dev-ARCH --target cwmr/pgsql-s3-restore:dev
+    else
+      docker tag cwmr/pgsql-s3-backup:amd64 cwmr/pgsql-s3-backup:$TRAVIS_TAG-amd64
+      docker tag cwmr/pgsql-s3-backup:arm cwmr/pgsql-s3-backup:$TRAVIS_TAG-arm
+      docker push cwmr/pgsql-s3-backup:$TRAVIS_TAG-amd64
+      docker push cwmr/pgsql-s3-backup:$TRAVIS_TAG-arm
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-backup:$TRAVIS_TAG-ARCH --target cwmr/pgsql-s3-backup:$TRAVIS_TAG
+      docker tag cwmr/pgsql-s3-restore:amd64 cwmr/pgsql-s3-restore:$TRAVIS_TAG-amd64
+      docker tag cwmr/pgsql-s3-restore:arm cwmr/pgsql-s3-restore:$TRAVIS_TAG-arm
+      docker push cwmr/pgsql-s3-restore:$TRAVIS_TAG-amd64
+      docker push cwmr/pgsql-s3-restore:$TRAVIS_TAG-arm
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template cwmr/pgsql-s3-restore:$TRAVIS_TAG-ARCH --target cwmr/pgsql-s3-restore:$TRAVIS_TAG
     fi

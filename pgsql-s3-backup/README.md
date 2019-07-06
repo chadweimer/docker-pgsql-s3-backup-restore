@@ -22,7 +22,7 @@ pgbackups3:
   links:
     - postgres
   environment:
-    SCHEDULE: '0 0 0 * * *'
+    SCHEDULE: '0 0 * * *'
     S3_REGION: region
     S3_ACCESS_KEY_ID: key
     S3_SECRET_ACCESS_KEY: secret

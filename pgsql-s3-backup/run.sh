@@ -9,7 +9,7 @@ fi
 if [ "${SCHEDULE}" = "**None**" ]; then
   sh backup.sh
 else
-  echo "$SCHEDULE /bin/sh backup.sh" > crontab-fragment.txt
+  echo "$SCHEDULE /bin/sh $(pwd)/backup.sh" > crontab-fragment.txt
   crontab -l | cat - crontab-fragment.txt > crontab.txt && crontab crontab.txt
   crond -f
 fi

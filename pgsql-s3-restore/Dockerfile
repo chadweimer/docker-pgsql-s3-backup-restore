@@ -1,10 +1,8 @@
-ARG ARCH=amd64
+FROM cwmr/aws-cli:1.22.6
+ARG TARGETPLATFORM
+LABEL maintainer="ch@dweimer.com"
 
-FROM cwmr/aws-cli:1.18.85-$ARCH
-
-RUN apk --no-cache update && \
-    apk --no-cache add postgresql && \
-    rm -rf /var/cache/apk/*
+RUN apk add --no-cache postgresql
 
 ENV POSTGRES_DATABASE **None**
 ENV POSTGRES_HOST **None**

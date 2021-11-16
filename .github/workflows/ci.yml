@@ -30,6 +30,6 @@ jobs:
         if: startswith(github.ref, 'refs/pull/')
       - run: |
           TAG="$(echo $GITHUB_REF | sed -e 's/^refs\/tags\///')"
-          docker buildx build --push --platform linux/amd64,linux/arm,linux/arm64 -t cwmr/pgsql-s3-backup:$(TAG) -f pgsql-s3-backup/Dockerfile pgsql-s3-backup
-          docker buildx build --push --platform linux/amd64,linux/arm,linux/arm64 -t cwmr/pgsql-s3-restore:$(TAG) -f pgsql-s3-restore/Dockerfile pgsql-s3-restore
+          docker buildx build --push --platform linux/amd64,linux/arm,linux/arm64 -t cwmr/pgsql-s3-backup:$TAG -t cwmr/pgsql-s3-backup:latest -f pgsql-s3-backup/Dockerfile pgsql-s3-backup
+          docker buildx build --push --platform linux/amd64,linux/arm,linux/arm64 -t cwmr/pgsql-s3-restore:$TAG -t cwmr/pgsql-s3-restore:latest -f pgsql-s3-restore/Dockerfile pgsql-s3-restore
         if: startswith(github.ref, 'refs/tags/')

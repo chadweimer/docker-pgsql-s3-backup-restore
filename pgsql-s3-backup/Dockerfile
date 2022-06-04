@@ -1,4 +1,4 @@
-FROM cwmr/aws-cli:1.22.6
+FROM cwmr/aws-cli:1.24.10
 ARG TARGETPLATFORM
 LABEL maintainer="ch@dweimer.com"
 
